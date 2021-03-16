@@ -1,9 +1,16 @@
 object MarkdownUtil {
+    fun url(
+        text: String,
+        url: String
+    ): String {
+        return "[$text]($url)"
+    }
+
     fun image(
         text: String,
         url: String
     ): String {
-        return "![$text]($url)"
+        return "!" + url(text = text, url = url)
     }
 
     fun table(

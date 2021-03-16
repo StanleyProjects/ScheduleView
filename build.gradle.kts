@@ -47,10 +47,19 @@ task<DefaultTask>("verifyReadme") {
                 color = "2962ff"
             )
         )
-        setOf(versionBadge).forEach {
+        val bintrayBadge = MarkdownUtil.url(
+            text = MarkdownUtil.image(
+                text = "",
+                url = "https://api.bintray.com/packages/${MavenUtil.groupId}/${Application.Id.lib}/images/download.svg"
+            ),
+            url = "https://bintray.com/${MavenUtil.groupId}/${Application.Id.lib}/_latestVersion"
+        )
+        setOf(
+            versionBadge,
+            bintrayBadge
+        ).forEach {
             check(lines.contains(it)) { "File by path ${file.absolutePath} must contains \"$it\" line!" }
         }
-        TODO("bintray")
     }
 }
 

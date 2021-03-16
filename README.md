@@ -3,7 +3,9 @@
 # ScheduleView
 
 Calendar schedule for the day android view.
----
+
+[![](https://api.bintray.com/packages/stanleyprojects/GreenRobotWidget/stan.grobwt.schdlvw/images/download.svg)](https://bintray.com/stanleyprojects/GreenRobotWidget/stan.grobwt.schdlvw/_latestVersion)
+
 Android project common|version
 -|-:
 build gradle|`4.0.1`
