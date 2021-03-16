@@ -29,11 +29,20 @@ jobs:
       github_pat: ${{secrets.PERSONAL_ACCESS_TOKEN}}
       RESOURCES_PATH: buildSrc/src/main/resources
     steps:
-      - if: github.event_name == 'pull_request'
+      - name: test env write
+        id: env_write
+        if: github.event_name == 'pull_request'
         run: |
           echo "PR_NUMBER=$(jq -r .pull_request.number $GITHUB_EVENT_PATH)" >> $GITHUB_ENV
+      - name: test env read
+        id: env_read
+        if: github.event_name == 'pull_request'
+        run: |
           echo "PR_NUMBER [${{env.PR_NUMBER}}]"
           echo "PR_NUMBER [$PR_NUMBER]"
+      - if: github.event_name == 'pull_request'
+        run: |
+          echo ::set-env name=PR_NUMBER::$(jq -r .pull_request.number $GITHUB_EVENT_PATH)
           echo ::set-env name=PR_SOURCE_BRANCH::$(jq -r .pull_request.base.ref $GITHUB_EVENT_PATH)
           echo ::set-env name=GIT_SOURCE_BRANCH::$(jq -r .pull_request.head.ref $GITHUB_EVENT_PATH)
           echo ::set-env name=GIT_COMMIT_SHA::$(jq -r .pull_request.head.sha $GITHUB_EVENT_PATH)
