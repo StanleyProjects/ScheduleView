@@ -2,18 +2,12 @@
 
 echo "main start..."
 
-ERROR_CODE_COMMON_FILE=11
 ERROR_CODE_VCS=21
+CODE=0
 
 export WORKFLOW=$RESOURCES_PATH/bash/workflow
 
-FILE="$WORKFLOW/vcs.sh"
-if [ ! -f "$FILE" ]; then
- echo "Version control system file \"$FILE\" error $CODE!"
- exit $ERROR_CODE_COMMON_FILE
-fi
-
-. $FILE
+. $WORKFLOW/vcs.sh
 CODE=$?
 if test $CODE -ne 0; then
  echo "Version control system error $CODE!"

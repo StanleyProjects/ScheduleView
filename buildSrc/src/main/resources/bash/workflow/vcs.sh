@@ -67,4 +67,4 @@ export GITHUB_WORKER_LOGIN=$(echo $body | jq -r .login)
 
 echo "vcs success"
 
-exit 0
+return 0
