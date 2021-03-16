@@ -1,6 +1,7 @@
 object Version {
     const val kotlin = "1.3.72"
     const val kotlinDsl = "1.3.6"
+    const val kotlinLint = "0.36.0"
 
     object Android {
         const val toolsBuildGradle = "4.0.1"

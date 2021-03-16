@@ -16,3 +16,12 @@ on:
         description: "GIT source branch name. For example [dev, master...]."
         required: true
         default: "dev"
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    env:
+      RESOURCES_PATH: buildSrc/src/main/resources
+    steps:
+      - working-directory: repository
+        run: /bin/bash $RESOURCES_PATH/bash/workflow/main.sh

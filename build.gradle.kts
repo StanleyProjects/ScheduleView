@@ -12,6 +12,42 @@ buildscript {
     }
 }
 
+val kotlinLint: Configuration by configurations.creating
+
+dependencies {
+    kotlinLint(Dependency.kotlinLint.notation())
+}
+
+val reportsPath = "${rootProject.buildDir}/reports"
+val analysisPath = "$reportsPath/analysis"
+val analysisStylePath = "$analysisPath/style"
+val analysisStyleHtmlPath = "$analysisStylePath/html/report.html"
+
+task<DefaultTask>("verifyAll") {
+    dependsOn(setOf(
+        "CodeStyle",
+        "License",
+        "Readme",
+        "Service"
+    ).map { "verify$it" })
+}
+
+task<JavaExec>("verifyCodeStyle") {
+    classpath = kotlinLint
+    main = "com.pinterest.ktlint.Main"
+    args(
+        "build.gradle.kts",
+        "settings.gradle.kts",
+        "buildSrc/src/main/kotlin/**/*.kt",
+        "buildSrc/build.gradle.kts",
+        "lib/src/main/kotlin/**/*.kt",
+        "lib/build.gradle.kts",
+        "sample/src/main/kotlin/**/*.kt",
+        "sample/build.gradle.kts",
+        "--reporter=html,output=$analysisStyleHtmlPath"
+    )
+}
+
 task<DefaultTask>("verifyLicense") {
     doLast {
         val file = File(rootDir, "LICENSE")

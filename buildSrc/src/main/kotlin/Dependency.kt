@@ -2,6 +2,7 @@ private object Group {
     const val android = "com.android"
     const val jetbrains = "org.jetbrains"
     const val kotlin = "$jetbrains.kotlin"
+    const val pinterest = "com.pinterest"
 }
 
 data class Dependency(
@@ -20,6 +21,12 @@ data class Dependency(
             group = Group.kotlin,
             name = "kotlin-gradle-plugin",
             version = Version.kotlin
+        )
+
+        val kotlinLint = Dependency(
+            group = Group.pinterest,
+            name = "ktlint",
+            version = Version.kotlinLint
         )
 
         val kotlinStdlib = Dependency(
