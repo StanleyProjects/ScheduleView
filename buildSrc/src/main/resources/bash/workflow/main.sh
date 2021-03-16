@@ -4,6 +4,7 @@ echo "main start..."
 
 ERROR_CODE_VCS=21
 ERROR_CODE_SETUP=22
+ERROR_CODE_BUILD=31
 CODE=0
 
 export WORKFLOW=$RESOURCES_PATH/bash/workflow
@@ -22,7 +23,24 @@ if test $CODE -ne 0; then
  exit $ERROR_CODE_SETUP
 fi
 
-exit 1 # todo
+if test "$IS_LIGHTWEIGHT_BUILD_INTERNAL" == $TRUE; then
+ echo "skip main pipeline..."
+else
+ . $WORKFLOW/build/main.sh || IS_BUILD_SUCCESS=$FALSE
+
+ if test $IS_BUILD_SUCCESS == $TRUE; then
+  . $WORKFLOW/after/success/main.sh || IS_BUILD_SUCCESS=$FALSE
+ fi
+ if test $IS_BUILD_SUCCESS != $TRUE; then
+  . $WORKFLOW/after/failure/main.sh
+ fi
+fi
+
+. $WORKFLOW/after/common.sh
+
+if test "$IS_BUILD_SUCCESS" != $TRUE; then
+ exit $ERROR_CODE_BUILD
+fi
 
 echo "main success"
 
