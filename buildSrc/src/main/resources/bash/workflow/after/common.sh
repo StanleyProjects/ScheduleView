@@ -56,13 +56,13 @@ merged by [$GIT_WORKER_NAME](https://github.com/$GITHUB_WORKER_LOGIN)"
                 fi
                 body=$(<file); rm file
                 closedBy=$(echo $body | jq -r .closed_by.login)
-                if test $closedBy == $GITHUB_WORKER_LOGIN; then
-                    BOT="
+                if test "$closedBy" == $GITHUB_WORKER_LOGIN; then
+                 BOT="
 
 pull request [#$PR_NUMBER](https://github.com/$GITHUB_OWNER/$GITHUB_REPO/pull/$PR_NUMBER) \
 closed by [$GIT_WORKER_NAME](https://github.com/$GITHUB_WORKER_LOGIN)"
                 else
-                    echo "Issue #$PR_NUMBER was not closed by $GITHUB_WORKER_LOGIN"
+                 echo "Issue #$PR_NUMBER was not closed by \"$GITHUB_WORKER_LOGIN\""
                 fi
             fi
         fi
