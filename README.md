@@ -8,8 +8,8 @@ Calendar schedule for the day android view.
 
 Android project common|version
 -|-:
-build gradle|`4.0.1`
-compile sdk|`29`
+build gradle|`4.0.2`
+compile sdk|`30`
 build tools|`29.0.3`
 min sdk|`16`
-target sdk|`29`
+target sdk|`30`

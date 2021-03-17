@@ -18,10 +18,7 @@ fun getOutputFileName(
 }
 
 android {
-    commonConfig {
-        versionName = Version.Name.lib
-        versionCode = VersionUtil.codeByName(versionName)
-    }
+    commonConfig(versionName = Version.Name.lib)
 
     signingConfigs {
         val properties = Properties().also {

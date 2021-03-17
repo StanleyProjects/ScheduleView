@@ -36,6 +36,17 @@ fun BaseExtension.commonConfig(
     )
 }
 
+fun BaseExtension.commonConfig(
+    versionName: String,
+    block: DefaultConfig.() -> Unit = {}
+) {
+    commonConfig {
+        this.versionName = versionName
+        versionCode = VersionUtil.codeByName(versionName)
+        block()
+    }
+}
+
 fun SigningConfig.defaultConfig(project: Project, properties: Properties) {
     val file = File(project.projectDir, "$name.jks")
     require(file.exists()) { "Keystore file must be exists by full path ${file.absolutePath}!" }

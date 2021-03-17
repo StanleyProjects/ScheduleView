@@ -21,10 +21,9 @@ val appName = "Green robot widget ScheduleView sample"
 val androidProjectName = name
 
 android {
-    commonConfig {
+    commonConfig(versionName = Version.Name.sample) {
         applicationId = Application.Id.sample
-        versionName = Version.Name.sample
-        versionCode = VersionUtil.codeByName(versionName)
+        versionCode = 1
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
     }
